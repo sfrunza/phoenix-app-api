@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style>
+    p {
+      margin: 0px;
+    }
+
+    td,
+    th {
+      height: 2rem;
+      border: 1px solid #d3d3d3;
+      text-align: center;
+      padding: 8px;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #e7f0ff;
+      border-color: white;
+    }
+
+    body {
+      padding: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <p>Hi, <%= @customer.first_name %>
+  </p>
+  <br>
+  <p>GREAT NEWS! Your requested moving date is AVAILABLE! <i>(Action Required)</i>
+  </p>
+  <br>
+  <p><b>Brave Movers - fully licensed, insured and credible moving company.</b></p>
+  <br>
+  <p>
+    We checked our schedule and currently have availability for the requested day and time to help you on your moving
+    project.
+  </p>
+  <br>
+  <p>Here are your credentials</p>
+  <br>
+  <p>
+    <b>Your login: 
+      <%= @customer.email %>
+    </b>
+  </p>
+  <p>
+    <b>Your password:
+      <%= @password %>
+    </b> 
+  </p>
+  <br>
+  <p>
+    Access your account here <%= link_to "Personal Account" , @login_url %>.
+  </p>
+  <br>
+  <p>
+    To reserve and confirm your moving rate/quote, date, crew and dedicated truck, we require a deposit. Deposits can
+    be safely paid at the personal account page by following this link <%= link_to "Personal Account" , @login_url %>
+      or over the phone with one of
+      our representatives. If it's more than 24 hours since you received availability confirmation from us, before
+      submitting any deposit, please email/call us to make sure your move date and time is still valid. That amount is
+      later deducted from your total on the day of the move.
+  </p>
+  <br>
+  <p>A deposit of $100.00 is required to reserve your local move and 10% of final quote for an interstate move.</p>
+  <br>
+  <p><i>BM tip: If your moving date is coming up soon, we encourage you to reserve your move as soon as possible. Our
+      online reservation system is based on first-come, first-serve basis.</i></p>
+  <br>
+  <h2>Moving Details</h2>
+  <table>
+    <tr>
+      <td colspan="2">
+        <b>Request #<%= @job.id %></b>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Name</th>
+      <td>
+        <%= @customer.first_name %>
+          <%= @customer.last_name %>
+      </td>
+    </tr>
+    
+    <tr>
+      <th>Email</th>
+      <td>
+        <%= @customer.email %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Phone</th>
+      <td>
+        <%= @customer.phone %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Move date</th>
+      <td>
+        <%= Date.parse(@job.pick_up_date).strftime("%B %e, %Y") %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Arrival window</th>
+      <td>
+        <%= @job.start_time %>
+      </td>
+    </tr>
+
+     <tr>
+        <th>Service</th>
+        <td>
+          <%= @job.job_type %>
+        </td>
+      </tr>
+
+    <% if @destination.any? %>
+      <tr>
+        <th>Moving from</th>
+        <td>
+          <%= @origin[0].address %>, <%= @origin[0].city %>, <%= @origin[0].state %>
+                <%= @origin[0].zip %>
+        </td>
+      </tr>
+      <% else %>
+        <tr>
+          <th>Address</th>
+          <td>
+            <%= @origin[0].address %>, <%= @origin[0].city %>, <%= @origin[0].state %>
+                  <%= @origin[0].zip %>
+          </td>
+        </tr>
+        <% end %>
+
+          <% if @destination.any? %>
+            <tr>
+              <th>Moving to</th>
+              <td>
+                <%= @destination[0].address %>, <%= @destination[0].city %>, <%= @destination[0].state %>
+                      <%= @destination[0].zip %>
+              </td>
+            </tr>
+            <% end %>
+
+              <tr>
+                <th>Move size</th>
+                <td>
+                  <%= @job.job_size %>
+                </td>
+              </tr>
+
+              <% if !@job.is_flat_rate %>
+                <tr>
+                  <th>Crew size</th>
+                  <td>
+                    <%= @job.crew_size %> movers
+                  </td>
+                </tr> 
+              <% end %>
+
+              <% if @job.is_flat_rate %>
+                <tr>
+                  <th> Flat rate</th>
+                  <td>$<%= @job.estimated_quote[0] %>
+                  </td>
+                </tr>
+                <% else %>
+                  <tr>
+                    <th>Rate</th>
+                    <td>$<%= @job.job_rate %>/h
+                    </td>
+                  </tr>
+                  <% end %>    
+
+                <% if !@job.is_flat_rate %>
+                  <tr>
+                    <th>Estimated job time</th>
+                    <% if @job.estimated_time[1] !=0 %>
+                        <td>
+                        <%= @job.estimated_time[0] %> - <%= @job.estimated_time[1] %> hours
+                        </td>
+                      <% else %>
+                        <td>
+                          <%= @job.estimated_time[0].to_i %> hours
+                        </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+
+                <% if !@job.is_flat_rate %>
+                  <tr>
+                   <th>Travel time</th>
+                   <td>
+                    <%= @job.travel_time[0] %>/<%= @job.travel_time[1] %> min
+                  </tr>
+                <% end %>   
+
+                    <tr>
+                      <th>Additional services</th>
+                      <td>$ 0</td>
+                    </tr>
+
+                    <% if !@job.is_flat_rate %>
+                  <tr>
+                      <th>Estimated quote</th>
+                      <% if @job.estimated_quote[1] !=0 %>
+                        <td>
+                          $<%= @job.estimated_quote[0] %> - $<%= @job.estimated_quote[1] %>
+                        </td>
+                        <% else %>
+                          <td>
+                            $<%= @job.estimated_quote[0] %>
+                          </td>
+                          <% end %>
+                    </tr>
+                <% end %>   
+  </table>
+  <br>
+  <p>Best Regards</p>
+  <p>Brave Movers Team</p>
+  <p><b>info@bravemovers.com</b></p>
+  <p><b>+1 (617) 599-5956 </b></p>
+  <p><b>www.bravemovers.com</b></p>
+</body>
+
+</html>

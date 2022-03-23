@@ -1,0 +1,17 @@
+# Add configuration values here, as shown below.
+#
+# pusher_app_id: "2954"
+# pusher_key: 7381a978f7dd7f9a1117
+# pusher_secret: abdc3b896a0ffb85d373
+# stripe_api_key: sk_test_2J0l093xOyW72XUYJHE4Dv2r
+# stripe_publishable_key: pk_test_ro9jV5SNwGb1yYlQfzG17LHK
+
+GMAIL_USERNAME: "info@bravemovers.com"
+GMAIL_PASSWORD: "hxqmgtdjvhpjysas"
+API_URL: "http://localhost:3001"
+S3_BUCKET_NAME: "main-app-images"
+AWS_ACCESS_KEY_ID: "AKIAZ5NRA3GXTPUHG2EO"
+AWS_SECRET_ACCESS_KEY: "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"
+AWS_REGION: "us-east-1"
+SEARCH_PATH: "https://api.yelp.com/v3/businesses/BFaGKRmiPsqvul7wCZtVvA/reviews"
+API_KEY: "9su95lnwSt1Mw4c2TrvtxgJnNUSoji1azttK886InSN9bF48pOSte_ddTJpVsKNBwwkoyXEdxnFKNlO8mnA_1lbHmPQq1dMJ841iqdQzR7pdYhHScMRfDZdsvSQgYnYx"

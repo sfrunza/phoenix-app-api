@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style>
+    p {margin: 0px;}
+  </style>
+</head>
+
+<body>
+  <p><b>Welcome to Brave Movers, <%= @customer.first_name %></b></p>
+  <br>
+  <p>
+    Thank you for thinking of Brave Movers for your upcoming move. We are excited to get the chance to make your move
+    stress free!
+  </p>
+  <p>
+    Our team is checking availability for requested day and time and will send you a confirmation shortly.
+  </p>
+  <br>
+  <p>
+    Meanwhile, you can view your moving details and manage them from your personal account page by following this link
+    <%= link_to "View My Moving Details" , @login_url %>. If you prefer to speak with one of our moving specialists,
+      simply call us!
+  </p>
+  <br>
+  <p>Here are your credentials</p>
+  <br>
+  <p>
+    <b>Your login: 
+      <%= @customer.email %>
+    </b>
+  </p>
+  <p>
+    <b>Your password:
+      <%= @password %>
+    </b>
+  </p>
+  <br>
+  <p><b>Brave Movers</b> is covering end-to-end moving solutions so there is no third-party involved in your moving
+    process. A few things that are included when you are getting a quote from Brave Movers:</p>
+  <ul>
+    <li>Moving labour</li>
+    <li>Dedicated truck</li>
+    <li>Furniture disassembly</li>
+    <li>Loading the truck</li>
+    <li>Offloading the truck</li>
+    <li>Furniture assembly</li>
+    <li>Labelling boxes</li>
+    <li>Furniture wrapping</li>
+    <li>Packing labour</li>
+    <li>Travel time</li>
+  </ul>
+  <br>
+  <p><i>BM tip: always check your moving quote and ask your moving consultant any questions you may have!</i></p>
+  <br>
+  <p>Best Regards</p>
+  <p>Brave Movers Team</p>
+  <p><b>info@bravemovers.com</b></p>
+  <p><b>+1 (617) 599-5956 </b></p>
+  <p><b>www.bravemovers.com</b></p>
+</body>
+
+</html>

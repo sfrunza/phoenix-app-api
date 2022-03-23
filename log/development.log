@@ -1,0 +1,298 @@
+  [1m[35m (173.7ms)[0m  [1m[35mCREATE DATABASE "phoenix-app-api_development" ENCODING = 'unicode'[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (89.1ms)[0m  [1m[35mCREATE DATABASE "phoenix-app-api_test" ENCODING = 'unicode'[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2508841342603070475)[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateJobs (20200403224439)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "jobs" ("id" bigserial primary key, "pick_up_date" character varying, "delivery_date" character varying, "is_flat_rate" boolean DEFAULT FALSE, "is_confirmed_by_customer" boolean DEFAULT FALSE, "is_confirmed_by_manager" boolean DEFAULT FALSE, "storage_fee" integer, "job_type" character varying, "start_time" character varying, "job_status" character varying, "job_size" character varying, "crew_size" integer, "job_rate" integer, "time_between" integer, "estimated_time" float[] DEFAULT '{}', "travel_time" integer[] DEFAULT '{}', "estimated_quote" integer[] DEFAULT '{}', "additional_info" text, "job_duration" float, "total_amount" float, "customer_id" bigint, "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20200403224439_create_jobs.rb:3
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_jobs_on_customer_id" ON "jobs"  ("customer_id")[0m
+  ↳ db/migrate/20200403224439_create_jobs.rb:3
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_jobs_on_user_id" ON "jobs"  ("user_id")[0m
+  ↳ db/migrate/20200403224439_create_jobs.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200403224439"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to DeviseCreateUsers (20200716214707)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20200716214707_devise_create_users.rb:5
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/migrate/20200716214707_devise_create_users.rb:39
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  ↳ db/migrate/20200716214707_devise_create_users.rb:40
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200716214707"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to AddAdminColumn (20200716215913)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "users" ADD "admin" boolean DEFAULT FALSE NOT NULL[0m
+  ↳ db/migrate/20200716215913_add_admin_column.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200716215913"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateImages (20200803031545)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "images" ("id" bigserial primary key, "image" character varying)[0m
+  ↳ db/migrate/20200803031545_create_images.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200803031545"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to AddColumnToImages (20200803042807)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "images" ADD "photo" character varying[0m
+  ↳ db/migrate/20200803042807_add_column_to_images.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200803042807"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to AddEmployeeToUser (20200919211925)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "first_name" character varying[0m
+  ↳ db/migrate/20200919211925_add_employee_to_user.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "last_name" character varying[0m
+  ↳ db/migrate/20200919211925_add_employee_to_user.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "role" character varying[0m
+  ↳ db/migrate/20200919211925_add_employee_to_user.rb:5
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "phone" character varying[0m
+  ↳ db/migrate/20200919211925_add_employee_to_user.rb:6
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "rate" integer[0m
+  ↳ db/migrate/20200919211925_add_employee_to_user.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "ssn" character varying[0m
+  ↳ db/migrate/20200919211925_add_employee_to_user.rb:8
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "address" character varying[0m
+  ↳ db/migrate/20200919211925_add_employee_to_user.rb:9
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "active" boolean DEFAULT FALSE NOT NULL[0m
+  ↳ db/migrate/20200919211925_add_employee_to_user.rb:10
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200919211925"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to AddJobIdToImages (20201005181650)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "images" ADD "job_id" integer[0m
+  ↳ db/migrate/20201005181650_add_job_id_to_images.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201005181650"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateRates (20210911005108)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "rates" ("id" bigserial primary key, "date" character varying, "rates" character varying[] DEFAULT '{}', "rate_type" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20210911005108_create_rates.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210911005108"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateJoinTableUsersCustomers (20210926220725)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "customers_users" ("user_id" bigint NOT NULL, "customer_id" bigint NOT NULL)[0m
+  ↳ db/migrate/20210926220725_create_join_table_users_customers.rb:3
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_customers_users_on_user_id_and_customer_id" ON "customers_users"  ("user_id", "customer_id")[0m
+  ↳ db/migrate/20210926220725_create_join_table_users_customers.rb:3
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_customers_users_on_customer_id_and_user_id" ON "customers_users"  ("customer_id", "user_id")[0m
+  ↳ db/migrate/20210926220725_create_join_table_users_customers.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210926220725"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateJoinTableJobsUsers (20210926232113)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "jobs_users" ("job_id" bigint NOT NULL, "user_id" bigint NOT NULL)[0m
+  ↳ db/migrate/20210926232113_create_join_table_jobs_users.rb:3
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_jobs_users_on_job_id_and_user_id" ON "jobs_users"  ("job_id", "user_id")[0m
+  ↳ db/migrate/20210926232113_create_join_table_jobs_users.rb:3
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_jobs_users_on_user_id_and_job_id" ON "jobs_users"  ("user_id", "job_id")[0m
+  ↳ db/migrate/20210926232113_create_join_table_jobs_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210926232113"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateAddresses (20211210203729)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "address" character varying, "city" character varying, "state" character varying, "zip" character varying, "floor" character varying, "apt_number" character varying, "is_origin" boolean DEFAULT FALSE, "is_destination" boolean DEFAULT FALSE, "is_pickup" boolean DEFAULT FALSE, "is_dropoff" boolean DEFAULT FALSE, "job_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20211210203729_create_addresses.rb:3
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_job_id" ON "addresses"  ("job_id")[0m
+  ↳ db/migrate/20211210203729_create_addresses.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20211210203729"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateReceipts (20211214185235)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "receipts" ("id" bigserial primary key, "file" character varying, "job_id" bigint)[0m
+  ↳ db/migrate/20211214185235_create_receipts.rb:3
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_receipts_on_job_id" ON "receipts"  ("job_id")[0m
+  ↳ db/migrate/20211214185235_create_receipts.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20211214185235"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreatePrices (20211215181000)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "prices" ("id" bigserial primary key, "two_men" integer[] DEFAULT '{}', "three_men" integer[] DEFAULT '{}', "four_men" integer[] DEFAULT '{}', "add_men" integer[] DEFAULT '{}', "add_truck" integer[] DEFAULT '{}', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20211215181000_create_prices.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20211215181000"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to DeviseCreateCustomers (20211221215209)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "customers" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "first_name" character varying, "last_name" character varying, "phone" character varying, "add_phone" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20211221215209_devise_create_customers.rb:5
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_customers_on_email" ON "customers"  ("email")[0m
+  ↳ db/migrate/20211221215209_devise_create_customers.rb:43
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_customers_on_reset_password_token" ON "customers"  ("reset_password_token")[0m
+  ↳ db/migrate/20211221215209_devise_create_customers.rb:44
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20211221215209"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateGalleries (20220103191825)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "galleries" ("id" bigserial primary key, "item" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20220103191825_create_galleries.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220103191825"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to AddDepositToJobs (20220106042246)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "jobs" ADD "deposit" integer[0m
+  ↳ db/migrate/20220106042246_add_deposit_to_jobs.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "jobs" ADD "is_deposit_paid" boolean DEFAULT FALSE NOT NULL[0m
+  ↳ db/migrate/20220106042246_add_deposit_to_jobs.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220106042246"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-03-23 03:05:09.388075"], ["updated_at", "2022-03-23 03:05:09.388075"]]
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2508841342603070475)[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:8
+  [1m[36mUser Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "frunza.sergiu3@gmail.com"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:8
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "frunza.sergiu3@gmail.com"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:8
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "admin", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "frunza.sergiu3@gmail.com"], ["encrypted_password", "$2a$12$nyfAN5lcJlqEdxxtT4.4JOBTK.AawrRmQ2Hxfy8JpBBAkBaAqZPW2"], ["created_at", "2022-03-23 03:05:16.897986"], ["updated_at", "2022-03-23 03:05:16.897986"], ["admin", true], ["first_name", "Sergiu"], ["last_name", "Frunza"]]
+  ↳ db/seeds.rb:8
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:8
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "slavic.frunza@gmail.com"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:9
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "slavic.frunza@gmail.com"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:9
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "admin", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "slavic.frunza@gmail.com"], ["encrypted_password", "$2a$12$EtuW7GKunkgaWvJAhSgxIupX6I7PLEyBGt4zKoelnWnSUd/tBmYL2"], ["created_at", "2022-03-23 03:05:17.070887"], ["updated_at", "2022-03-23 03:05:17.070887"], ["admin", true], ["first_name", "Slavic"], ["last_name", "Frunza"]]
+  ↳ db/seeds.rb:9
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:10
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "tomac.daniel@gmail.com"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:10
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "tomac.daniel@gmail.com"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:10
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "admin", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "tomac.daniel@gmail.com"], ["encrypted_password", "$2a$12$SRpT0CuItLj93rNBHHMTVO7krzbVQFXE3v7ZSmWO.8ZindRlqk4.K"], ["created_at", "2022-03-23 03:05:17.242618"], ["updated_at", "2022-03-23 03:05:17.242618"], ["admin", true], ["first_name", "Daniel"], ["last_name", "Tomac"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mPrice Create (0.6ms)[0m  [1m[32mINSERT INTO "prices" ("two_men", "three_men", "four_men", "add_men", "add_truck", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["two_men", "{100,120,140}"], ["three_men", "{140,160,180}"], ["four_men", "{180,200,220}"], ["add_men", "{40,40,40}"], ["add_truck", "{30,30,30}"], ["created_at", "2022-03-23 03:05:17.253441"], ["updated_at", "2022-03-23 03:05:17.253441"]]
+  ↳ db/seeds.rb:12
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:12
+Started GET "/" for ::1 at 2022-03-22 23:05:28 -0400
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/gems/railties-5.2.6/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/sergiufrunza/.rvm/gems/ruby-2.5.1/gems/railties-5.2.6/lib/rails/templates/rails/welcome/index.html.erb (2.8ms)
+Completed 200 OK in 10ms (Views: 7.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for ::1 at 2022-03-22 23:05:31 -0400
+Processing by Api::V1::JobsController#index as HTML
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.11ms)
+Completed 200 OK in 24ms (Views: 18.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/v1/users" for ::1 at 2022-03-22 23:05:34 -0400
+Processing by Api::V1::UsersController#index as HTML
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/v1/images" for ::1 at 2022-03-22 23:05:38 -0400
+Processing by Api::V1::ImagesController#index as HTML
+  [1m[36mImage Load (0.9ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE "images"."job_id" = $1 ORDER BY id DESC[0m  [["job_id", 0]]
+  ↳ app/controllers/api/v1/images_controller.rb:8
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.15ms)
+Completed 200 OK in 16ms (Views: 7.5ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/api/v1/photos" for ::1 at 2022-03-22 23:05:42 -0400
+Processing by ApplicationController#fallback_index_html as HTML
+  Parameters: {"path"=>"api/v1/photos"}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template public/index.html with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby]}. Searched in:
+  * "/Users/sergiufrunza/Desktop/phoenix-app-api/app/views"
+  * "/Users/sergiufrunza/.rvm/gems/ruby-2.5.1/gems/devise-4.8.0/app/views"
+  * "/Users/sergiufrunza/Desktop/phoenix-app-api"
+  * "/"
+):
+  
+app/controllers/application_controller.rb:8:in `fallback_index_html'
+Started GET "/api/v1/prices" for ::1 at 2022-03-22 23:07:25 -0400
+Processing by Api::V1::PricesController#index as HTML
+  [1m[36mPrice Load (0.6ms)[0m  [1m[34mSELECT "prices".* FROM "prices"[0m
+  ↳ app/controllers/api/v1/prices_controller.rb:8
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.42ms)
+Completed 200 OK in 19ms (Views: 10.9ms | ActiveRecord: 6.5ms)
+
+

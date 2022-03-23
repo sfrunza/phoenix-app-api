@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style>
+    p {
+      margin: 0px;
+    }
+  </style>
+</head>
+
+<body>
+  <p>Request # <%= @job.id %>
+  </p>
+  <br>
+  <p>Customer: <%= @customer.first_name %>
+      <%= @customer.last_name %>
+  </p>
+  <br>
+  <p>
+    Deposit paid <b>$ <%= @job.deposit %></b></p>
+  <br>
+</body>
+
+</html>
